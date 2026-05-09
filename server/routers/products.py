@@ -99,6 +99,21 @@ async def get_low_stock(admin=Depends(require_admin)):
     return [dict(row) for row in rows]
 
 
+
+@router.get("/featured")
+async def get_featured_products():
+    rows = await database.fetch_all(
+        "SELECT * FROM products WHERE is_active = TRUE ORDER BY created_at DESC LIMIT 6"
+    )
+    return [dict(row) for row in rows]
+
+@router.get("/categories")
+async def get_categories():
+    rows = await database.fetch_all(
+        "SELECT category as name, COUNT(*) as count FROM products WHERE is_active = TRUE GROUP BY category"
+    )
+    return [dict(row) for row in rows]
+
 @router.get("/{id}")
 async def get_product(id: int):
     row = await database.fetch_one(

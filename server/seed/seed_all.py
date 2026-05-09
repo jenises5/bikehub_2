@@ -126,7 +126,6 @@ async def seed():
             "category": "road_bike",
             "riding_style": "fitness",
             "frame_size": "S",
-            "component_type": "complete_bike",
             "description": "Fast fitness bike with disc brakes. Shimano 24-speed.",
         },
         {
@@ -138,7 +137,6 @@ async def seed():
             "category": "road_bike",
             "riding_style": "fitness",
             "frame_size": "M",
-            "component_type": "complete_bike",
             "description": "Fast fitness bike with disc brakes. Shimano 24-speed.",
         },
         {
@@ -150,7 +148,6 @@ async def seed():
             "category": "road_bike",
             "riding_style": "fitness",
             "frame_size": "L",
-            "component_type": "complete_bike",
             "description": "Fast fitness bike with disc brakes. Shimano 24-speed.",
         },
         {
@@ -162,7 +159,6 @@ async def seed():
             "category": "road_bike",
             "riding_style": "road",
             "frame_size": "M",
-            "component_type": "complete_bike",
             "description": "Entry-level road bike. Great for beginners.",
         },
         {
@@ -174,7 +170,6 @@ async def seed():
             "category": "road_bike",
             "riding_style": "road",
             "frame_size": "L",
-            "component_type": "complete_bike",
             "description": "Entry-level road bike. Great for beginners.",
         },
         {
@@ -186,7 +181,6 @@ async def seed():
             "category": "road_bike",
             "riding_style": "fitness",
             "frame_size": "M",
-            "component_type": "complete_bike",
             "description": "Premium fitness bike with hydraulic disc brakes.",
         },
         # Mountain Bikes
@@ -199,7 +193,6 @@ async def seed():
             "category": "mountain_bike",
             "riding_style": "mountain",
             "frame_size": "M",
-            "component_type": "complete_bike",
             "description": "XC mountain bike with 29-inch wheels. Shimano 21-speed.",
         },
         {
@@ -211,7 +204,6 @@ async def seed():
             "category": "mountain_bike",
             "riding_style": "mountain",
             "frame_size": "L",
-            "component_type": "complete_bike",
             "description": "XC mountain bike with 29-inch wheels. Shimano 21-speed.",
         },
         {
@@ -223,7 +215,6 @@ async def seed():
             "category": "mountain_bike",
             "riding_style": "trail",
             "frame_size": "M",
-            "component_type": "complete_bike",
             "description": "Trail mountain bike with Manitou fork. Great for beginners.",
         },
         {
@@ -235,7 +226,6 @@ async def seed():
             "category": "mountain_bike",
             "riding_style": "mountain",
             "frame_size": "M",
-            "component_type": "complete_bike",
             "description": "Budget mountain bike. Perfect for beginners.",
         },
         {
@@ -247,7 +237,6 @@ async def seed():
             "category": "mountain_bike",
             "riding_style": "mountain",
             "frame_size": "S",
-            "component_type": "complete_bike",
             "description": "Budget mountain bike. Perfect for beginners.",
         },
         {
@@ -259,7 +248,6 @@ async def seed():
             "category": "mountain_bike",
             "riding_style": "mountain",
             "frame_size": "M",
-            "component_type": "complete_bike",
             "description": "Entry level PH local brand mountain bike.",
         },
         # Hybrid/All-Around
@@ -272,7 +260,6 @@ async def seed():
             "category": "hybrid_bike",
             "riding_style": "versatile",
             "frame_size": "M",
-            "component_type": "complete_bike",
             "description": "All-around hybrid bike for commuting and fitness.",
         },
         {
@@ -284,7 +271,6 @@ async def seed():
             "category": "hybrid_bike",
             "riding_style": "versatile",
             "frame_size": "L",
-            "component_type": "complete_bike",
             "description": "All-around hybrid bike for commuting and fitness.",
         },
         {
@@ -296,7 +282,6 @@ async def seed():
             "category": "mountain_bike",
             "riding_style": "all-around",
             "frame_size": "M",
-            "component_type": "complete_bike",
             "description": "Versatile mountain bike for trails and daily rides.",
         },
         {
@@ -308,7 +293,6 @@ async def seed():
             "category": "mountain_bike",
             "riding_style": "all-around",
             "frame_size": "L",
-            "component_type": "complete_bike",
             "description": "Versatile mountain bike for trails and daily rides.",
         },
     ]
@@ -324,7 +308,6 @@ async def seed():
             "category": "frame",
             "riding_style": "mountain",
             "frame_size": "M",
-            "component_type": "frame",
             "description": "Lightweight Alpha Gold aluminum frame. 29-inch compatible.",
         },
         {
@@ -336,7 +319,6 @@ async def seed():
             "category": "frame",
             "riding_style": "mountain",
             "frame_size": "L",
-            "component_type": "frame",
             "description": "Lightweight Alpha Gold aluminum frame. 29-inch compatible.",
         },
         {
@@ -348,7 +330,6 @@ async def seed():
             "category": "frame",
             "riding_style": "mountain",
             "frame_size": "M",
-            "component_type": "frame",
             "description": "ALUXX aluminum mountain bike frame. 26-inch compatible.",
         },
         {
@@ -360,7 +341,6 @@ async def seed():
             "category": "frame",
             "riding_style": "mountain",
             "frame_size": "S",
-            "component_type": "frame",
             "description": "ALUXX aluminum mountain bike frame. 26-inch compatible.",
         },
         {
@@ -372,7 +352,6 @@ async def seed():
             "category": "frame",
             "riding_style": "mountain",
             "frame_size": "M",
-            "component_type": "frame",
             "description": "Budget aluminum mountain bike frame.",
         },
         {
@@ -384,7 +363,6 @@ async def seed():
             "category": "frame",
             "riding_style": "road",
             "frame_size": "M",
-            "component_type": "frame",
             "description": "Lightweight road bike aluminum frame.",
         },
     ]
@@ -400,7 +378,6 @@ async def seed():
             "category": "fork",
             "riding_style": "mountain",
             "frame_size": "M",
-            "component_type": "fork",
             "description": "100mm travel air suspension fork. 29-inch. Rebound adjustment.",
         },
         {
@@ -412,7 +389,6 @@ async def seed():
             "category": "fork",
             "riding_style": "mountain",
             "frame_size": "M",
-            "component_type": "fork",
             "description": "100mm travel coil fork. 26/27.5 inch. Great value.",
         },
         {
@@ -424,7 +400,6 @@ async def seed():
             "category": "fork",
             "riding_style": "road",
             "frame_size": "M",
-            "component_type": "fork",
             "description": "Budget rigid carbon-look fork. Road/hybrid use.",
         },
     ]
@@ -440,7 +415,6 @@ async def seed():
             "category": "drivetrain",
             "riding_style": "mountain",
             "frame_size": "M",
-            "component_type": "drivetrain",
             "description": "11-speed MTB groupset. Shadow Plus rear derailleur. Reliable and smooth.",
         },
         {
@@ -452,7 +426,6 @@ async def seed():
             "category": "drivetrain",
             "riding_style": "mountain",
             "frame_size": "M",
-            "component_type": "drivetrain",
             "description": "9-speed entry MTB groupset. Great value for budget builds.",
         },
         {
@@ -464,7 +437,6 @@ async def seed():
             "category": "drivetrain",
             "riding_style": "road",
             "frame_size": "M",
-            "component_type": "drivetrain",
             "description": "8-speed road groupset. Entry-level road cycling performance.",
         },
         {
@@ -476,7 +448,6 @@ async def seed():
             "category": "drivetrain",
             "riding_style": "mountain",
             "frame_size": "M",
-            "component_type": "drivetrain",
             "description": "12-speed 1x drivetrain. Wide range cassette. Trail ready.",
         },
         {
@@ -488,7 +459,6 @@ async def seed():
             "category": "drivetrain",
             "riding_style": "mountain",
             "frame_size": "M",
-            "component_type": "drivetrain",
             "description": "Budget 9-speed MTB drivetrain. Good value alternative.",
         },
     ]
@@ -504,7 +474,6 @@ async def seed():
             "category": "wheels",
             "riding_style": "mountain",
             "frame_size": "M",
-            "component_type": "wheels",
             "description": "29-inch tubeless-ready wheelset. Strong and lightweight.",
         },
         {
@@ -516,7 +485,6 @@ async def seed():
             "category": "wheels",
             "riding_style": "mountain",
             "frame_size": "M",
-            "component_type": "wheels",
             "description": "29-inch MTB tires. Excellent traction on dirt and gravel.",
         },
         {
@@ -528,7 +496,6 @@ async def seed():
             "category": "wheels",
             "riding_style": "mountain",
             "frame_size": "M",
-            "component_type": "wheels",
             "description": "Budget 26-inch aluminum wheelset. Good for entry builds.",
         },
     ]
@@ -544,7 +511,6 @@ async def seed():
             "category": "brakes",
             "riding_style": "mountain",
             "frame_size": "M",
-            "component_type": "brakes",
             "description": "Entry hydraulic disc brakes. Reliable stopping power for trails.",
         },
         {
@@ -556,7 +522,6 @@ async def seed():
             "category": "brakes",
             "riding_style": "mountain",
             "frame_size": "M",
-            "component_type": "brakes",
             "description": "Mid-range hydraulic disc brakes. Good value for the price.",
         },
         {
@@ -568,7 +533,6 @@ async def seed():
             "category": "brakes",
             "riding_style": "mountain",
             "frame_size": "M",
-            "component_type": "brakes",
             "description": "Budget mechanical disc brakes. Good for beginners.",
         },
     ]
@@ -584,7 +548,6 @@ async def seed():
             "category": "accessories",
             "riding_style": "mountain",
             "frame_size": "M",
-            "component_type": "accessory",
             "description": "Comfortable trail saddle with pressure relief channel.",
         },
         {
@@ -596,7 +559,6 @@ async def seed():
             "category": "accessories",
             "riding_style": "mountain",
             "frame_size": "M",
-            "component_type": "accessory",
             "description": "Wide platform flat pedals. Great grip for trail riding.",
         },
         {
@@ -608,7 +570,6 @@ async def seed():
             "category": "accessories",
             "riding_style": "mountain",
             "frame_size": "M",
-            "component_type": "accessory",
             "description": "Budget aluminum riser handlebar and stem combo.",
         },
     ]
@@ -622,9 +583,9 @@ async def seed():
             """
             INSERT INTO products
             (name, price, stock_quantity, low_stock_threshold, brand_id,
-             category, riding_style, frame_size, component_type, description, image_url)
+             category, riding_style, frame_size, description, image_url)
             VALUES (:name, :price, :stock_quantity, :low_stock_threshold, :brand_id,
-             :category, :riding_style, :frame_size, :component_type, :description, :image_url)
+             :category, :riding_style, :frame_size, :description, :image_url)
             """,
             {**product, "image_url": ""},
         )
