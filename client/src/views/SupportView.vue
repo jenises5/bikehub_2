@@ -1,5 +1,17 @@
 <script setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { useCartStore } from "../stores/cart";
+import { useUserStore } from "../stores/user";
+
+const router = useRouter();
+const cartStore = useCartStore();
+const userStore = useUserStore();
+
+function logout() {
+  userStore.logout();
+  router.push("/login");
+}
 
 const openFaq = ref(null);
 
@@ -42,10 +54,8 @@ const contactForm = ref({ name: "", email: "", subject: "", message: "" });
 const submitted = ref(false);
 
 function submitForm() {
-  // In a real app this would call an API
   submitted.value = true;
 }
-
 function toggleFaq(index) {
   openFaq.value = openFaq.value === index ? null : index;
 }
@@ -55,7 +65,6 @@ function toggleFaq(index) {
   <div
     class="min-h-screen bg-neutral-950 text-neutral-100 font-body antialiased"
   >
-    <!-- NAV -->
     <nav
       class="sticky top-0 z-50 backdrop-blur-md bg-neutral-950/80 border-b border-neutral-800"
     >
@@ -63,9 +72,9 @@ function toggleFaq(index) {
         class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between"
       >
         <div class="flex items-center gap-12">
-          <router-link to="/" class="font-display text-2xl tracking-tight">
-            BIKE<span class="text-lime-400">HUB</span>
-          </router-link>
+          <router-link to="/" class="font-display text-2xl tracking-tight"
+            >BIKE<span class="text-lime-400">HUB</span></router-link
+          >
           <div
             class="hidden md:flex items-center gap-8 font-mono text-xs uppercase tracking-widest text-neutral-400"
           >
@@ -90,14 +99,27 @@ function toggleFaq(index) {
           </div>
         </div>
         <div class="flex items-center gap-6">
+          <template v-if="userStore.isLoggedIn">
+            <span
+              class="hidden md:inline font-mono text-xs uppercase tracking-widest text-lime-400"
+              >{{ userStore.user?.name?.split(" ")[0] }}</span
+            >
+            <button
+              @click="logout"
+              class="hidden md:inline font-mono text-xs uppercase tracking-widest text-neutral-400 hover:text-red-400 transition-colors"
+            >
+              Logout
+            </button>
+          </template>
           <router-link
+            v-else
             to="/login"
             class="hidden md:inline font-mono text-xs uppercase tracking-widest text-neutral-400 hover:text-lime-400 transition-colors"
             >Login</router-link
           >
           <router-link
             to="/cart"
-            class="text-neutral-400 hover:text-lime-400 transition-colors"
+            class="relative text-neutral-400 hover:text-lime-400 transition-colors"
           >
             <svg
               class="w-5 h-5"
@@ -112,12 +134,16 @@ function toggleFaq(index) {
                 d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"
               />
             </svg>
+            <span
+              v-if="cartStore.count > 0"
+              class="absolute -top-2 -right-2 bg-lime-400 text-neutral-950 text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center"
+              >{{ cartStore.count }}</span
+            >
           </router-link>
         </div>
       </div>
     </nav>
 
-    <!-- HEADER -->
     <div class="border-b border-neutral-800">
       <div class="max-w-7xl mx-auto px-6 py-12">
         <div
@@ -131,7 +157,6 @@ function toggleFaq(index) {
       </div>
     </div>
 
-    <!-- QUICK LINKS -->
     <div class="border-b border-neutral-800">
       <div
         class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-2 md:grid-cols-4 gap-4"
@@ -141,7 +166,9 @@ function toggleFaq(index) {
         >
           <div class="text-2xl mb-3">📦</div>
           <div class="font-display text-lg mb-1">Orders</div>
-          <div class="font-mono text-xs text-neutral-500">Track & manage</div>
+          <div class="font-mono text-xs text-neutral-500">
+            Track &amp; manage
+          </div>
         </div>
         <div
           class="bg-neutral-900 border border-neutral-800 hover:border-lime-400 transition-colors p-6 text-center"
@@ -156,7 +183,7 @@ function toggleFaq(index) {
           <div class="text-2xl mb-3">🚚</div>
           <div class="font-display text-lg mb-1">Shipping</div>
           <div class="font-mono text-xs text-neutral-500">
-            Cebu & nationwide
+            Cebu &amp; nationwide
           </div>
         </div>
         <div
@@ -170,7 +197,6 @@ function toggleFaq(index) {
     </div>
 
     <div class="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-16">
-      <!-- FAQ -->
       <div>
         <div
           class="font-mono text-xs uppercase tracking-widest text-neutral-500 mb-3"
@@ -204,7 +230,6 @@ function toggleFaq(index) {
         </div>
       </div>
 
-      <!-- CONTACT FORM -->
       <div>
         <div
           class="font-mono text-xs uppercase tracking-widest text-neutral-500 mb-3"
@@ -212,7 +237,6 @@ function toggleFaq(index) {
           // CONTACT
         </div>
         <h2 class="font-display text-4xl mb-8">Send a Message</h2>
-
         <div
           v-if="submitted"
           class="bg-neutral-900 border border-lime-400 p-8 text-center"
@@ -230,14 +254,12 @@ function toggleFaq(index) {
             Send Another →
           </button>
         </div>
-
         <div v-else class="space-y-4">
           <div>
             <label
               class="font-mono text-xs uppercase tracking-widest text-neutral-500 mb-2 block"
               >Name</label
-            >
-            <input
+            ><input
               v-model="contactForm.name"
               type="text"
               placeholder="Your name"
@@ -248,8 +270,7 @@ function toggleFaq(index) {
             <label
               class="font-mono text-xs uppercase tracking-widest text-neutral-500 mb-2 block"
               >Email</label
-            >
-            <input
+            ><input
               v-model="contactForm.email"
               type="email"
               placeholder="your@email.com"
@@ -277,8 +298,7 @@ function toggleFaq(index) {
             <label
               class="font-mono text-xs uppercase tracking-widest text-neutral-500 mb-2 block"
               >Message</label
-            >
-            <textarea
+            ><textarea
               v-model="contactForm.message"
               rows="5"
               placeholder="How can we help?"
@@ -292,32 +312,27 @@ function toggleFaq(index) {
             Send Message →
           </button>
         </div>
-
-        <!-- Contact info -->
         <div class="mt-10 pt-8 border-t border-neutral-800 space-y-3">
           <div
             class="flex items-center gap-3 font-mono text-xs text-neutral-500"
           >
-            <span class="text-lime-400">📍</span>
-            <span>Cebu City, Philippines</span>
+            <span class="text-lime-400">📍</span
+            ><span>Cebu City, Philippines</span>
           </div>
           <div
             class="flex items-center gap-3 font-mono text-xs text-neutral-500"
           >
-            <span class="text-lime-400">✉️</span>
-            <span>support@bikehub.ph</span>
+            <span class="text-lime-400">✉️</span><span>support@bikehub.ph</span>
           </div>
           <div
             class="flex items-center gap-3 font-mono text-xs text-neutral-500"
           >
-            <span class="text-lime-400">⏰</span>
-            <span>Mon–Sat, 9am–6pm</span>
+            <span class="text-lime-400">⏰</span><span>Mon–Sat, 9am–6pm</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- FOOTER -->
     <footer class="border-t border-neutral-800">
       <div
         class="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between gap-4 font-mono text-xs text-neutral-500 uppercase tracking-widest"

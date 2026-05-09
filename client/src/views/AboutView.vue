@@ -1,4 +1,17 @@
 <script setup>
+import { useRouter } from "vue-router";
+import { useCartStore } from "../stores/cart";
+import { useUserStore } from "../stores/user";
+
+const router = useRouter();
+const cartStore = useCartStore();
+const userStore = useUserStore();
+
+function logout() {
+  userStore.logout();
+  router.push("/login");
+}
+
 const team = [
   {
     name: "Mark Daniel Castillo",
@@ -34,7 +47,6 @@ const stats = [
   <div
     class="min-h-screen bg-neutral-950 text-neutral-100 font-body antialiased"
   >
-    <!-- NAV -->
     <nav
       class="sticky top-0 z-50 backdrop-blur-md bg-neutral-950/80 border-b border-neutral-800"
     >
@@ -42,9 +54,9 @@ const stats = [
         class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between"
       >
         <div class="flex items-center gap-12">
-          <router-link to="/" class="font-display text-2xl tracking-tight">
-            BIKE<span class="text-lime-400">HUB</span>
-          </router-link>
+          <router-link to="/" class="font-display text-2xl tracking-tight"
+            >BIKE<span class="text-lime-400">HUB</span></router-link
+          >
           <div
             class="hidden md:flex items-center gap-8 font-mono text-xs uppercase tracking-widest text-neutral-400"
           >
@@ -67,14 +79,27 @@ const stats = [
           </div>
         </div>
         <div class="flex items-center gap-6">
+          <template v-if="userStore.isLoggedIn">
+            <span
+              class="hidden md:inline font-mono text-xs uppercase tracking-widest text-lime-400"
+              >{{ userStore.user?.name?.split(" ")[0] }}</span
+            >
+            <button
+              @click="logout"
+              class="hidden md:inline font-mono text-xs uppercase tracking-widest text-neutral-400 hover:text-red-400 transition-colors"
+            >
+              Logout
+            </button>
+          </template>
           <router-link
+            v-else
             to="/login"
             class="hidden md:inline font-mono text-xs uppercase tracking-widest text-neutral-400 hover:text-lime-400 transition-colors"
             >Login</router-link
           >
           <router-link
             to="/cart"
-            class="text-neutral-400 hover:text-lime-400 transition-colors"
+            class="relative text-neutral-400 hover:text-lime-400 transition-colors"
           >
             <svg
               class="w-5 h-5"
@@ -89,12 +114,16 @@ const stats = [
                 d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"
               />
             </svg>
+            <span
+              v-if="cartStore.count > 0"
+              class="absolute -top-2 -right-2 bg-lime-400 text-neutral-950 text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center"
+              >{{ cartStore.count }}</span
+            >
           </router-link>
         </div>
       </div>
     </nav>
 
-    <!-- HERO -->
     <section class="border-b border-neutral-800">
       <div
         class="max-w-7xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-12 items-center"
@@ -136,7 +165,6 @@ const stats = [
       </div>
     </section>
 
-    <!-- MISSION -->
     <section class="border-b border-neutral-800">
       <div class="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-3 gap-12">
         <div>
@@ -178,7 +206,6 @@ const stats = [
       </div>
     </section>
 
-    <!-- TEAM -->
     <section class="border-b border-neutral-800">
       <div class="max-w-7xl mx-auto px-6 py-20">
         <div
@@ -216,7 +243,6 @@ const stats = [
       </div>
     </section>
 
-    <!-- CTA -->
     <section class="border-b border-neutral-800">
       <div class="max-w-7xl mx-auto px-6 py-24 text-center">
         <h2 class="font-display text-5xl md:text-7xl mb-6">Ready to ride?</h2>
@@ -227,25 +253,22 @@ const stats = [
           <router-link
             to="/builder"
             class="inline-flex items-center gap-3 bg-lime-400 hover:bg-lime-300 text-neutral-950 font-mono text-sm uppercase tracking-widest px-8 py-4 transition-colors"
+            >Start Your Build →</router-link
           >
-            Start Your Build →
-          </router-link>
           <router-link
             to="/shop"
             class="inline-flex items-center gap-3 border border-neutral-700 hover:border-lime-400 hover:text-lime-400 text-neutral-300 font-mono text-sm uppercase tracking-widest px-8 py-4 transition-colors"
+            >Browse Shop</router-link
           >
-            Browse Shop
-          </router-link>
         </div>
       </div>
     </section>
 
-    <!-- FOOTER -->
     <footer class="border-t border-neutral-800">
       <div
         class="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between gap-4 font-mono text-xs text-neutral-500 uppercase tracking-widest"
       >
-        <div>© © 2026 BIKEHUB · EDGETECH · CEBU, PH</div>
+        <div>© 2026 BIKEHUB · EDGETECH · CEBU, PH</div>
         <router-link to="/" class="hover:text-lime-400 transition-colors"
           >← Back to Home</router-link
         >
