@@ -1,3 +1,5 @@
+from fastapi.staticfiles import StaticFiles  # ✅ ADDED
+import os  # ✅ ADDED
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database import database
@@ -13,6 +15,12 @@ from routers import (
 )
 
 app = FastAPI(title="BikeHub API", version="1.0.0")
+
+# ✅ ADDED — Serve uploaded images as static files
+os.makedirs("uploads/products", exist_ok=True)
+os.makedirs("uploads/payments", exist_ok=True)
+os.makedirs("uploads/qr", exist_ok=True)
+app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 
 app.add_middleware(
     CORSMiddleware,

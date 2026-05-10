@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Geist:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    @apply bg-cream text-stone-900 font-sans;
+    font-feature-settings: "ss01", "cv11";
+  }
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight;
+    font-feature-settings: "ss01";
+  }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: #D6CFC0;
+    border-radius: 999px;
+    border: 2px solid #FAF7F2;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: #B8AF9C; }
+
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] { -moz-appearance: textfield; }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium rounded
+           transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed select-none;
+  }
+  .btn-primary {
+    @apply btn bg-clay-700 text-cream hover:bg-clay-800 active:scale-[0.98];
+  }
+  .btn-secondary {
+    @apply btn bg-white text-stone-900 border border-stone-300 hover:bg-stone-50 hover:border-stone-400;
+  }
+  .btn-ghost {
+    @apply btn text-stone-700 hover:bg-stone-100;
+  }
+  .btn-danger {
+    @apply btn bg-red-700 text-white hover:bg-red-800;
+  }
+
+  .input {
+    @apply w-full px-3.5 py-2.5 text-sm bg-white border border-stone-300 rounded
+           focus:outline-none focus:ring-2 focus:ring-clay-200 focus:border-clay-600
+           placeholder:text-stone-400 transition-colors;
+  }
+  .input-label {
+    @apply block text-xs font-medium tracking-wider uppercase text-stone-500 mb-1.5;
+  }
+
+  .card {
+    @apply bg-white border border-stone-200 rounded-lg;
+  }
+  .card-hover {
+    @apply card transition-all duration-200 hover:border-stone-300 hover:shadow-soft;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 text-2xs font-medium rounded-full
+           tracking-wider uppercase;
+  }
+  .badge-pending     { @apply badge bg-amber-100 text-amber-900; }
+  .badge-confirmed   { @apply badge bg-blue-100 text-blue-900; }
+  .badge-processing  { @apply badge bg-violet-100 text-violet-900; }
+  .badge-ready       { @apply badge bg-teal-100 text-teal-900; }
+  .badge-delivered   { @apply badge bg-emerald-100 text-emerald-900; }
+  .badge-completed   { @apply badge bg-emerald-100 text-emerald-900; }
+  .badge-cancelled   { @apply badge bg-stone-200 text-stone-700; }
+  .badge-paid        { @apply badge bg-emerald-100 text-emerald-900; }
+  .badge-unpaid      { @apply badge bg-stone-200 text-stone-700; }
+  .badge-pending_verification { @apply badge bg-amber-100 text-amber-900; }
+  .badge-rejected    { @apply badge bg-red-100 text-red-900; }
+  .badge-collected   { @apply badge bg-emerald-100 text-emerald-900; }
+
+  .tier-1 { @apply bg-amber-100  text-amber-900; }
+  .tier-2 { @apply bg-emerald-100 text-emerald-900; }
+  .tier-3 { @apply bg-violet-100  text-violet-900; }
+
+  .eyebrow {
+    @apply text-2xs font-medium tracking-widest uppercase text-clay-700;
+  }
+
+  .spinner {
+    @apply inline-block w-5 h-5 border-2 border-stone-300 border-t-clay-700 rounded-full animate-spin;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 240ms ease-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

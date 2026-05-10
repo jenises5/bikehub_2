@@ -3,6 +3,9 @@ from pydantic import BaseModel
 from typing import Optional
 from database import database
 from dependencies import get_current_user, require_admin
+from fastapi import APIRouter, HTTPException, Depends, UploadFile, File
+import os
+import uuid
 
 router = APIRouter(prefix="/products", tags=["Products"])
 
@@ -161,3 +164,53 @@ async def delete_product(id: int, admin=Depends(require_admin)):
         "UPDATE products SET is_active = FALSE WHERE id = :id", {"id": id}
     )
     return {"message": "Product deleted!"}
+
+
+PRODUCT_IMAGE_DIR = "uploads/products"
+ALLOWED_EXTENSIONS = {"jpg", "jpeg", "png", "webp"}
+
+
+@router.post("/{id}/upload-image")
+async def upload_product_image(
+    id: int, file: UploadFile = File(...), admin=Depends(require_admin)
+):
+    # Check product exists
+    product = await database.fetch_one(
+        "SELECT id FROM products WHERE id = :id", {"id": id}
+    )
+    if not product:
+        raise HTTPException(status_code=404, detail="Product not found")
+
+    # Validate file type
+    ext = file.filename.split(".")[-1].lower()
+    if ext not in ALLOWED_EXTENSIONS:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Invalid file type. Only {ALLOWED_EXTENSIONS} are allowed.",
+        )
+
+    # Check file size (max 5MB)
+    contents = await file.read()
+    if len(contents) > 5 * 1024 * 1024:
+        raise HTTPException(status_code=400, detail="File too large. Max 5MB.")
+
+    # Save file
+    os.makedirs(PRODUCT_IMAGE_DIR, exist_ok=True)
+    filename = f"product_{id}_{uuid.uuid4()}.{ext}"
+    filepath = os.path.join(PRODUCT_IMAGE_DIR, filename)
+
+    with open(filepath, "wb") as f:
+        f.write(contents)
+
+    # Update product image_url
+    image_url = f"/uploads/products/{filename}"
+    await database.execute(
+        "UPDATE products SET image_url = :image_url WHERE id = :id",
+        {"image_url": image_url, "id": id},
+    )
+
+    return {
+        "message": "Product image uploaded!",
+        "image_url": image_url,
+        "full_url": f"http://localhost:8000{image_url}",
+    }
