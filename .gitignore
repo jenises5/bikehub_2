@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+env/
+
+# Environment variables
+.env
+
+# Node / Vue (client handled separately)
+node_modules/
+dist/
+
+# Uploads
+server/uploads/
+
+# Database
+*.db
+*.sqlite3
